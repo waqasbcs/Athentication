@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user profile</title>
+</head>
+<body>
+<h1>profile page</h1>
+<h2>wellcome {{name}}</h2>
+{% if messages %}
+ {% for message in messages %}
+ <small{% if message.tags %}class="{{message.tags}}" {% endif %}> {{message}}</small>
+{% endfor %}
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <p class="er">{{error}}</p>
+    {% endfor %}
+    {% endif %}
+
+{% for fm in form %} 
+{{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+{% endfor %}
+<input type="submit" value="save"></br>
+</form>
+    <a href="{% url 'logout' %}"> logout </a><br>
+    <a href="{% url 'changepass' %}"> changepass </a></br>
+    <a href="{% url 'changepass1' %}"> changepass1 </a></br>
+
+</body>
+</html>
